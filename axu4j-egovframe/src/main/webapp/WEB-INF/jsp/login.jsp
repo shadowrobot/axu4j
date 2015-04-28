@@ -64,6 +64,10 @@
                             on:this.on, off:this.off, value:this.value}));
                     }});
                     toast.push({type:"Caution", body:"WELCOME TO AXU"});
+                    dialog.push('alert');
+                    AXModal.openDiv({
+                    	top:100
+                    });
                 }
             };
         </script>
