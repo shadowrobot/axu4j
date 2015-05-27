@@ -7,7 +7,6 @@ import egovframework.let.cop.bbs.service.*;
 import egovframework.let.uat.uia.service.EgovLoginService;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +16,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,7 +128,7 @@ public class AXU4JController {
         model.addAttribute("brdMstrVO", masterVo);
     }
 
-    @RequestMapping("/edit.do")
+    @RequestMapping(value={ "/edit.do", "/edit-non-axu4j.do" })
     public void edit(@ModelAttribute("searchVO") BoardVO boardVO, @ModelAttribute("board") BoardVO vo, ModelMap model)
         throws Exception {
 
@@ -296,4 +294,7 @@ public class AXU4JController {
 
     @RequestMapping(value="/split.do")
     public void split_page() { }
+
+    @RequestMapping(value="/table.do")
+    public void table_page() { }
 }

@@ -5,12 +5,18 @@ import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.tagext.JspFragment;
+import java.io.IOException;
 
-public class FieldsTag extends AXUTagSupport {
+/**
+ * Created by HJ.Park on 2015-05-12.
+ */
+public class TableTag extends AXUTagSupport {
 
-    public FieldsTag() throws Exception {
+
+    public TableTag() throws Exception {
         super();
     }
+
 
     // =======================================================
 
@@ -20,8 +26,9 @@ public class FieldsTag extends AXUTagSupport {
 
     // =======================================================
 
+
     public String getId() {
-        return StringUtils.defaultIfEmpty(id, String.format("fields-%d", tagIndex));
+        return StringUtils.defaultIfEmpty(id, String.format("table-%d", tagIndex));
     }
 
     public void setId(String id) {
@@ -44,16 +51,13 @@ public class FieldsTag extends AXUTagSupport {
         this.style = style;
     }
 
-    // =======================================================
 
     @Override
-    public void beforeDoTag(JspContext context, JspFragment fragment) {
-        this.tagBody = ConfigReader.getConfig().getFieldsWrap();
+    public void beforeDoTag(JspContext context, JspFragment fragment) throws IOException {
+        this.tagBody = ConfigReader.getConfig().getTableWrap();
         this.doBody = TagUtils.toString(fragment);
     }
 
     @Override
-    public void afterDoTag(JspContext context, JspFragment fragment) {
-    }
-
+    public void afterDoTag(JspContext context, JspFragment fragment) { }
 }

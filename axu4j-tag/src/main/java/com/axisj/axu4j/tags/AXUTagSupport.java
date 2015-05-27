@@ -90,8 +90,17 @@ public abstract class AXUTagSupport extends SimpleTagSupport implements DynamicA
             String    mustacheKey = getClass().getCanonicalName();
             AXUConfig config      = ConfigReader.getConfig();
 
+            if (this instanceof CustomTag) {
+                CustomTag customTag = (CustomTag) this;
+                mustacheKey = mustacheKey + "#" + customTag.getCustomid();
+            }
+
             mustacheHtml = mustacheCacheMap.get(mustacheKey);
             if (mustacheHtml == null) {
+				if (tagBody == null) {
+					throw new RuntimeException("tag body is empty. please check your aux4j.xml");
+				}
+
                 mustacheHtml = mustacheFactory.compile(new StringReader(tagBody), mustacheKey);
 
                 if (!StringUtils.equalsIgnoreCase("DEV", config.getMode())) {
